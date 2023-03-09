@@ -14,8 +14,13 @@ import React from "react";
 // }
 
 class Info extends React.Component {
+    constructor(props) {
+        super(props);
+        console.log(props)
+    }
+
     render() {
-        const title = "This is my title";
+        const title = this.props.title
         const showTitle = true;
 
         return (
@@ -25,6 +30,11 @@ class Info extends React.Component {
             </div>
         );
     }
+}
+
+
+Info.defaultProps = {
+    title: "Default title"
 }
 
 export default Info;
