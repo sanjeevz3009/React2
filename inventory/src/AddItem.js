@@ -15,14 +15,18 @@ function AddItem(props) {
     };
 
     return (
-        <div>
-            <h2>Add A Item</h2>
-            <form>
+        <div className="container">
+            <div className="row">
+                <h2>Add A Item</h2>
+            </div>
+
+            <div className="row">
                 <label htmlFor="name-field">Name: </label>
                 <input
                     id="name-field"
                     type="text"
                     value={name}
+                    className="form-control"
                     onChange={(e) => setName(e.target.value)}>
                 </input>
 
@@ -31,6 +35,7 @@ function AddItem(props) {
                     id="price-field"
                     type="number"
                     value={price}
+                    className="form-control"
                     onChange={(e) => setPrice(e.target.value)}>
                 </input>
 
@@ -39,6 +44,7 @@ function AddItem(props) {
                     id="type-field"
                     type="text"
                     value={type}
+                    className="form-control"
                     onChange={(e) => setType(e.target.value)}>
                 </input>
 
@@ -47,11 +53,16 @@ function AddItem(props) {
                     id="brand-field"
                     type="text"
                     value={brand}
+                    className="form-control"
                     onChange={(e) => setBrand(e.target.value)}>
                 </input>
+            </div>
 
-                <button type="button" onClick={addItemButtonPressed}>Add Item</button>
-            </form>
+            <div className="row mt-3">
+                <button type="button" className="btn btn-dark" onClick={addItemButtonPressed}>
+                    Add Item
+                </button>
+            </div>
         </div>
     );
 }
