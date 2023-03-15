@@ -21,10 +21,27 @@ function App() {
 
   const addItemToData = (item) => {
     let items = data["items"];
-    item.id = items.length;
-    items.push(item);
-    setData({ items: items });
-    console.log(data);
+
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(item)
+    }
+    fetch("http://localhost:3000/items", requestOptions)
+    .then((response) => response.json())
+    .then((data) => {
+      items.push(data);
+      setData({ items: items })
+    });
+
+    /*
+    GET: Get information/ give me some information
+    POST: Creating information/ sending information the server/ add data to database/ creating account
+    PUT: Updating info or data on the server
+    DELETE: Deletes data from the server
+    */
   }
 
   const filterData = (data) => {
