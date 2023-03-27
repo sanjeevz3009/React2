@@ -1,9 +1,10 @@
 import './App.css';
 import { PropTypes } from "prop-types";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 import AddItem from "./AddItem";
 import ItemsDisplay from './ItemsDisplay';
+import Test from "./Class";
 import styled from "styled-components";
 
 // const Title = styled.h1`
@@ -14,6 +15,12 @@ import styled from "styled-components";
 function App() {
   const [filters, setFilters] = useState({});
   const [data, setData] = useState({ items: [] });
+
+  useEffect(() => {
+    fetch("http://localhost:3000/items")
+    .then((response) => response.json())
+    .then((data) => setData({ items: data }));
+  }, []);
 
   const updateFilters = (searchParams) => {
     setFilters(searchParams);
@@ -28,7 +35,7 @@ function App() {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(item)
-    }
+    };
     fetch("http://localhost:3000/items", requestOptions)
     .then((response) => response.json())
     .then((data) => {
@@ -42,37 +49,37 @@ function App() {
     PUT: Updating info or data on the server
     DELETE: Deletes data from the server
     */
-  }
+  };
 
   const filterData = (data) => {
     const filteredData = [];
 
     if (!filters.name) {
       return data;
-    }
+    };
 
     for (const item of data) {
         if (filters.name !== "" && item.name !== filters.name) {
           continue;
-        }
+        };
 
         if (filters.price !== 0 && item.price > filters.price) {
           continue;
-        }
+        };
 
         if (filters.type !== "" && item.type !== filters.type) {
           continue;
-        }
+        };
 
         if (filters.brand !== "" && item.brand !== filters.brand) {
           continue;
-        }
+        };
 
         filteredData.push(item);
-    }
+    };
 
     return filteredData;
-  }
+  };
 
   return (
     <div className="container">
